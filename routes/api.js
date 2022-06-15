@@ -10,4 +10,11 @@ module.exports = (app) => {
     .get((req, res) => {})
     .put((req, res) => {})
     .delete((req, res) => {});
+
+  app.get("/api/test", (req, res) => {
+    res.send({
+      express:
+        "Estou mandando mensagem do Backend em Express para o Frontend em React!",
+    });
+  });
 };

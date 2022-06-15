@@ -234,6 +234,30 @@ Estilização da seção dos testimoniais
 }
 
 /*
+Estilização da seção dos resultados
+(Beba água, levante, alongue-se, vá dar uma volta, não se force camarada ;D )
+*/
+
+#results {
+  width: 100%;
+  background: #eee;
+  color: #111;
+  padding: 50px;
+}
+
+/*
+Estilização da seção dos dados
+(Beba água, levante, alongue-se, vá dar uma volta, não se force camarada ;D )
+*/
+
+#statistics {
+  width: 100%;
+  background: #111;
+  color: #eee;
+  padding: 50px;
+}
+
+/*
 Estilização da seção da galeria
 (Beba água, levante, alongue-se, vá dar uma volta, não se force camarada ;D )
 */
