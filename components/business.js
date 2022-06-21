@@ -20,10 +20,12 @@ function time_delta(initialH, initialM, finalH, finalM) {
 
   if (initialH == finalH && initialM == finalM) {
     console.log("ESTA PROVA DUROU 24 HORA(S) E 0 MINUTO(S)");
-    return { deltaH: 24, deltaM: 0 };
+    //return { deltaH: 24, deltaM: 0 };
+    return 24 * 60;
   } else {
     console.log(`ESTA PROVA DUROU ${deltaH} HORA(S) E ${deltaM} MINUTO(S)`);
-    return { deltaH, deltaM };
+    //return { deltaH, deltaM };
+    return deltaH * 60 + deltaM;
   }
 }
 

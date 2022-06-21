@@ -4,8 +4,9 @@ const { Schema } = mongoose;
 const resultSchema = new Schema({
   quarter: { type: Number, required: true },
   grades: { type: [Number], required: true },
-  average: { type: Number },
   time: { type: [Date] },
+  comment: { type: String },
+  index: { type: Number },
 });
 
 const studentSchema = new Schema({

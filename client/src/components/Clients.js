@@ -4,12 +4,12 @@ class Clients extends Component {
   render() {
     return (
       <section id="clients">
-        <div class="headline">NOSSOS CLIENTES</div>
+        <div className="headline">NOSSOS CLIENTES</div>
         <div id="clients-container">
-          <img class="client" src="./img/netflix.png" alt="Netflix" />
-          <img class="client" src="./img/google.png" alt="Google" />
-          <img class="client" src="./img/apple.png" alt="Apple" />
-          <img class="client" src="./img/microsoft.png" alt="Microsoft" />
+          <img className="client" src="./img/netflix.png" alt="Netflix" />
+          <img className="client" src="./img/google.png" alt="Google" />
+          <img className="client" src="./img/apple.png" alt="Apple" />
+          <img className="client" src="./img/microsoft.png" alt="Microsoft" />
         </div>
       </section>
     );

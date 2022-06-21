@@ -7,24 +7,21 @@ import Results from "./components/Results";
 import Statistics from "./components/Statistics";
 import Gallery from "./components/Gallery";
 
+import client from "./controller/client";
 class App extends Component {
-  state = {
-    response: "",
-  };
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
-    this.callApi()
-      .then((res) => this.setState({ response: res.express }))
-      .catch((err) => console.log(err));
+    this.state = {
+      results: [],
+    };
   }
 
-  callApi = async () => {
-    const response = await fetch("/api/test");
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-
-    return body;
-  };
+  componentDidMount() {
+    client.get("/api/results").then((response) => {
+      this.setState({ results: response.data });
+    });
+  }
 
   render() {
     return (
@@ -33,8 +30,8 @@ class App extends Component {
         <Features />
         <Product />
         <Testimonials />
-        <Results message={this.state.response} />
-        <Statistics message={this.state.response} />
+        <Results />
+        <Statistics data={this.state.results} />
         <Gallery />
       </div>
     );

@@ -4,13 +4,13 @@ class Testimonials extends Component {
   render() {
     return (
       <section id="testimonials">
-        <div class="headline">O QUE ACHAM DE NÓS</div>
+        <div className="headline">O QUE ACHAM DE NÓS</div>
         <div id="testimonials-container">
-          <div class="testimonial">
+          <div className="testimonial">
             <img
               src="./img/person-1.jpeg"
               alt="Fulano"
-              class="testimonial-img"
+              className="testimonial-img"
             />
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid
@@ -18,11 +18,11 @@ class Testimonials extends Component {
               provident optio.
             </p>
           </div>
-          <div class="testimonial">
+          <div className="testimonial">
             <img
               src="./img/person-2.jpeg"
               alt="Siclano"
-              class="testimonial-img"
+              className="testimonial-img"
             />
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid

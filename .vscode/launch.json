@@ -1,0 +1,23 @@
+{
+  // Use o IntelliSense para saber mais sobre os atributos possíveis.
+  // Focalizar para exibir as descrições dos atributos existentes.
+  // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}\\continha.js",
+      "runtimeExecutable": "/home/fslawliet/.nvm/versions/node/v14.17.1/bin/node"
+    },
+    {
+      "name": "Node.js - Debug Current File",
+      "type": "node",
+      "request": "launch",
+      "program": "${file}",
+      "runtimeExecutable": "/home/fslawliet/.nvm/versions/node/v14.17.1/bin/node"
+    }
+  ]
+}
