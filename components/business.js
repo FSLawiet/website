@@ -1,9 +1,19 @@
+/**
+ * @brief Calcula uma média ponderada entre três notas
+ *
+ *
+ * @param {float} nota1 Primeira nota, com peso 2
+ * @param {float} nota2 Segunda nota, com peso 3
+ * @param {float} nota3 Terceira nota, com peso 5
+ * @returns {float} A média entre os três valores
+ */
 function average(nota1, nota2, nota3) {
   let media = (nota1 * 2 + nota2 * 3 + nota3 * 5) / 10;
 
-  console.log("MEDIA = " + media.toFixed(1));
+  //console.log("MEDIA = " + media.toFixed(1));
   return media.toFixed(1);
 }
+
 function time_delta(initialH, initialM, finalH, finalM) {
   let deltaH = finalH - initialH;
   let deltaM = finalM - initialM;
@@ -19,11 +29,11 @@ function time_delta(initialH, initialM, finalH, finalM) {
   }
 
   if (initialH == finalH && initialM == finalM) {
-    console.log("ESTA PROVA DUROU 24 HORA(S) E 0 MINUTO(S)");
+    //console.log("ESTA PROVA DUROU 24 HORA(S) E 0 MINUTO(S)");
     //return { deltaH: 24, deltaM: 0 };
     return 24 * 60;
   } else {
-    console.log(`ESTA PROVA DUROU ${deltaH} HORA(S) E ${deltaM} MINUTO(S)`);
+    //console.log(`ESTA PROVA DUROU ${deltaH} HORA(S) E ${deltaM} MINUTO(S)`);
     //return { deltaH, deltaM };
     return deltaH * 60 + deltaM;
   }

@@ -3,7 +3,7 @@ Estilização responsiva da navbar
 (Beba água, levante, alongue-se, vá dar uma volta, não se force camarada ;D )
 */
 #navbar {
-  height: 180px;
+  height: 260px;
 }
 
 #navbar-container {
@@ -18,6 +18,11 @@ Estilização responsiva da navbar
 }
 
 #navbar-items li:nth-child(2) {
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+}
+
+#navbar-items li:nth-child(4) {
   border-top: 1px solid #333;
   border-bottom: 1px solid #333;
 }
@@ -78,6 +83,27 @@ Estilização responsiva da seção do testimonial
 */
 
 .testimonial {
+  flex-direction: column;
+  text-align: center;
+}
+
+/*
+Estilização responsiva da seção dos resultados
+(Beba água, levante, alongue-se, vá dar uma volta, não se force camarada ;D )
+*/
+
+#results-container {
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  text-align: center;
+}
+
+/*
+Estilização responsiva da seção das estatísticas
+(Beba água, levante, alongue-se, vá dar uma volta, não se force camarada ;D )
+*/
+
+.statistics {
   flex-direction: column;
   text-align: center;
 }

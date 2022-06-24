@@ -25,19 +25,23 @@ class Results extends Component {
     this.setComment = this.setComment.bind(this);
     this.setDataI = this.setDataI.bind(this);
     this.setDataF = this.setDataF.bind(this);
+    this.fetchBestResults = this.fetchBestResults.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
-    client.get("/api/results").then((response) => {
+    this.fetchBestResults();
+  }
+
+  fetchBestResults() {
+    client.get("/api/results?best=true").then((response) => {
       this.setState({ best_results: response.data });
     });
   }
 
   setName(event) {
     this.setState({ name: event.target.value });
-    console.log(event.target);
     if (event.target.selectedIndex === 0 || event.target.type === "text") {
       this.setState({ new: true });
     } else {
@@ -75,7 +79,16 @@ class Results extends Component {
   }
 
   handleDelete(event) {
-    alert("TODO");
+    let confirm = window.confirm("Deseja excluir esta nota?");
+    if (confirm) {
+      client
+        .delete("/api/results", { data: { _id: event.target.id } })
+        .then((response) => {
+          this.props.fetchData();
+          this.fetchBestResults();
+          alert(response.data);
+        });
+    }
   }
 
   addData(state) {
@@ -90,6 +103,8 @@ class Results extends Component {
           dataF: state.dataF,
         })
         .then((response) => {
+          this.props.fetchData();
+          this.fetchBestResults();
           alert(response.data);
         });
     } else {
@@ -103,6 +118,8 @@ class Results extends Component {
           dataF: state.dataF,
         })
         .then((response) => {
+          this.props.fetchData();
+          this.fetchBestResults();
           alert(response.data);
         });
     }
@@ -114,25 +131,29 @@ class Results extends Component {
         <div className="headline">NOSSOS RESULTADOS</div>
         <div id="results-container">
           <div id="results-cards">
-            {this.state.best_results.map((result) => {
+            {this.state.best_results.map((result, index) => {
               let tempo;
               if (result.time === 1) tempo = `${result.time} minuto`;
               else tempo = `${result.time} minutos`;
 
               return (
                 <div className="results-card">
-                  <h2>{result.average}</h2>
-                  <p>{result.student_name}</p>
+                  <p>{index + 1}º</p>
+                  <h1>{result.average}</h1>
+                  <p>
+                    {result.student_name} - {result.quarter}º Bimestre
+                  </p>
                   <p>
                     {result.grades[0]}, {result.grades[1]}, {result.grades[2]}
                   </p>
+                  <q>{result.comment}</q>
                   <p>Completado em {tempo}</p>
                   <a
                     onClick={this.handleDelete}
                     id={result.student_id}
                     class="btn"
                   >
-                    <i className="fas fa-solid fa-trash fa-2x"></i>
+                    <i className="fas fa-solid fa-trash"></i>
                   </a>
                 </div>
               );
@@ -147,15 +168,13 @@ class Results extends Component {
                   <option id="new" value="">
                     ***Novo Aluno***
                   </option>
-                  <option id="mod" value="Luana">
-                    Luana
-                  </option>
-                  <option id="mod" value="Robson">
-                    Robson
-                  </option>
-                  <option id="mod" value="Matilda">
-                    Matilda
-                  </option>
+                  {this.props.data.map((entry) => {
+                    return (
+                      <option id="mod" value={entry.student_name}>
+                        {entry.student_name}
+                      </option>
+                    );
+                  })}
                 </select>
                 <br />
                 <input
@@ -169,43 +188,44 @@ class Results extends Component {
               </fieldset>
               <fieldset>
                 <legend>Notas das Provas</legend>
-                <input
-                  type="radio"
-                  id="q1"
-                  className="q"
-                  name="quarter"
-                  value="1"
-                  onChange={this.setQuarter}
-                />
-                <label htmlFor="q1">1º Bimestre</label>
-                <input
-                  type="radio"
-                  id="q2"
-                  className="q"
-                  name="quarter"
-                  value="2"
-                  onChange={this.setQuarter}
-                />
-                <label htmlFor="q2">2º Bimestre</label>
-                <input
-                  type="radio"
-                  id="q3"
-                  className="q"
-                  name="quarter"
-                  value="3"
-                  onChange={this.setQuarter}
-                />
-                <label htmlFor="q3">3º Bimestre</label>
-                <input
-                  type="radio"
-                  id="q4"
-                  className="q"
-                  name="quarter"
-                  value="4"
-                  onChange={this.setQuarter}
-                />
-                <label htmlFor="q4">4º Bimestre</label>
-                <br />
+                <div id="qbox">
+                  <input
+                    type="radio"
+                    id="q1"
+                    className="q"
+                    name="quarter"
+                    value="1"
+                    onChange={this.setQuarter}
+                  />
+                  <label htmlFor="q1">1º Bimestre</label>
+                  <input
+                    type="radio"
+                    id="q2"
+                    className="q"
+                    name="quarter"
+                    value="2"
+                    onChange={this.setQuarter}
+                  />
+                  <label htmlFor="q2">2º Bimestre</label>
+                  <input
+                    type="radio"
+                    id="q3"
+                    className="q"
+                    name="quarter"
+                    value="3"
+                    onChange={this.setQuarter}
+                  />
+                  <label htmlFor="q3">3º Bimestre</label>
+                  <input
+                    type="radio"
+                    id="q4"
+                    className="q"
+                    name="quarter"
+                    value="4"
+                    onChange={this.setQuarter}
+                  />
+                  <label htmlFor="q4">4º Bimestre</label>
+                </div>
                 <label htmlFor="nota1">Nota 1:</label>
                 <input
                   type="number"
@@ -266,8 +286,10 @@ class Results extends Component {
                   onChange={this.setDataF}
                 ></input>
               </fieldset>
-              <input className="btn" type="reset" value="Limpar campos" />
-              <input className="btn" type="submit" value="Enviar" />
+              <div id="btnbox">
+                <input className="btn" type="reset" value="Limpar campos" />
+                <input className="btn" type="submit" value="Enviar" />
+              </div>
             </form>
           </div>
         </div>

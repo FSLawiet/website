@@ -16,22 +16,13 @@ describe("1. Testes de unidade", () => {
   });
   describe("1.2 Função de diferença de tempo", () => {
     test("Um tempo ai", () => {
-      expect(Business.time_delta(7, 8, 9, 10)).toStrictEqual({
-        deltaH: 2,
-        deltaM: 2,
-      });
+      expect(Business.time_delta(7, 8, 9, 10)).toStrictEqual(122);
     });
     test("Um tempo ai", () => {
-      expect(Business.time_delta(7, 7, 7, 7)).toStrictEqual({
-        deltaH: 24,
-        deltaM: 0,
-      });
+      expect(Business.time_delta(7, 7, 7, 7)).toStrictEqual(1440);
     });
     test("Um tempo ai", () => {
-      expect(Business.time_delta(7, 10, 8, 9)).toStrictEqual({
-        deltaH: 0,
-        deltaM: 59,
-      });
+      expect(Business.time_delta(7, 10, 8, 9)).toStrictEqual(59);
     });
   });
 });

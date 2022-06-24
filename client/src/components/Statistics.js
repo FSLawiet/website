@@ -17,9 +17,7 @@ function Scatterplot({ data }) {
     const tooltip = d3.select("#tooltip").style("opacity", 0);
 
     data.map((d) => {
-      console.log(d.time);
       d.time = new Date(1970, 1, 1, parseInt(d.time / 60), d.time % 60, 0);
-      console.log(d.time);
     });
 
     let timeFormat = d3.timeFormat("%H:%M");
@@ -29,7 +27,12 @@ function Scatterplot({ data }) {
       .scaleTime()
       .domain([new Date(1970, 1, 1, 0, 0, 0), new Date(1970, 1, 1, 3, 0, 0)])
       .range([padding, svgWidth]);
-    const yScale = d3.scaleLinear().domain([10, 0]).range([padding, svgHeight]);
+    const yScale = d3
+      .scaleLinear()
+      .domain([10, 0])
+      .range([padding, svgHeight]);
+
+    var symbol = d3.symbol();
 
     //inicialização do elemento svg
     const svg = d3
@@ -41,15 +44,23 @@ function Scatterplot({ data }) {
     //svg.selectAll("*").remove();
     //renderização dos pontos
     svg
-      .selectAll("circle")
+      .selectAll("path")
       .data(data)
       .enter()
-      .append("circle")
+      .append("path")
       .attr("className", "dot")
-      .attr("data-xvalue", (d) => d.time)
-      .attr("data-yvalue", (d) => d.average)
-      .attr("cx", (d) => xScale(d.time))
-      .attr("cy", (d) => yScale(d.average))
+      .attr(
+        "d",
+        symbol.type((d) => {
+          if (d.is_approved) return d3.symbolStar;
+          else return d3.symbolCross;
+        })
+      )
+      //.attr("cx", (d) => xScale(d.time))
+      //.attr("cy", (d) => yScale(d.average))
+      .attr("transform", (d) => {
+        return "translate(" + xScale(d.time) + "," + yScale(d.average) + ")";
+      })
       .attr("r", 5)
       .attr("fill", (d) => {
         if (d.quarter === 1) return "#c86666";
@@ -57,7 +68,7 @@ function Scatterplot({ data }) {
         else if (d.quarter === 3) return "#6666c8";
         else if (d.quarter === 4) return "#66c866";
       })
-      .style("stroke", "#eee")
+      .attr("stroke", "#eee")
       .on("mouseover", (event, d) => {
         tooltip
           .style("opacity", 0.9)

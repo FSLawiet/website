@@ -280,11 +280,18 @@ Estilização da seção dos resultados
   width: 100%;
 }
 
+#results-form form {
+  box-shadow: 5px 5px 6px 6px #555;
+  padding: 2rem;
+  border-radius: 15px;
+  background-color: white;
+}
+
 #results-form form fieldset {
   border: #111 solid 1px;
   border-radius: 15px;
   padding: 20px;
-  text-align: center;
+  margin-bottom: 15px;
 }
 
 #results-form form fieldset legend {
@@ -295,12 +302,41 @@ Estilização da seção dos resultados
 }
 
 #results-form form fieldset label {
-  padding-right: 15px;
+  display: block;
+  padding: 0 0.8rem 0.25rem 0;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+#results-form form fieldset input,
+textarea,
+select {
+  display: block;
+  width: 100%;
+  border: 2px solid #111;
+  padding: 0.5rem;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+#results-form form fieldset #qbox {
+  display: flex;
+  margin-bottom: 0.5rem;
 }
 
 #results-form form fieldset .q {
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 50%;
   margin-right: 5px;
   accent-color: #111;
+}
+
+#results-form form #btnbox {
+  text-align: center;
 }
 /*
 Estilização da seção dos dados

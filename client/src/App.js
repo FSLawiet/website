@@ -15,9 +15,15 @@ class App extends Component {
     this.state = {
       results: [],
     };
+
+    this.fetchData = this.fetchData.bind(this);
   }
 
   componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData() {
     client.get("/api/results").then((response) => {
       this.setState({ results: response.data });
     });
@@ -30,7 +36,7 @@ class App extends Component {
         <Features />
         <Product />
         <Testimonials />
-        <Results />
+        <Results data={this.state.results} fetchData={this.fetchData} />
         <Statistics data={this.state.results} />
         <Gallery />
       </div>
